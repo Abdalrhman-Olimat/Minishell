@@ -1,4 +1,0 @@
-cat << EOF
-test
-EOF
-exit
