@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 04:12:27 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/15 17:53:07 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:55:21 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ int	execute_cmds(t_shell *shell, int i, int j)
 	// set_all_signals();
 	if (pipe_data.got_forked)
 		wait_children(shell, shell->cmds, 0, 0);
+		// Close heredoc file descriptors
+	for (j = 0; shell->cmds[j]; j++)
+	{
+		if (shell->cmds[j]->fd_of_heredoc >= 0)
+		{
+			close(shell->cmds[j]->fd_of_heredoc);
+			shell->cmds[j]->fd_of_heredoc = -1;
+		}
+	}
 	
 	return (0);
 }
