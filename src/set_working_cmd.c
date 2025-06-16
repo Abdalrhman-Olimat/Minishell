@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_working_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 06:02:17 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/15 11:33:43 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/06/16 19:52:29 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	handle_directory(t_shell *sh, t_command_data *cmd)
 			free_token_array(sh->analyzing_data.args, token_count);
 		if (sh->tokens)
 			free_list(sh->tokens);
+		free_tracked_heredoc_nodes(&(sh->heredoc_tracker));
 		free_both_envp_paths(sh);
 		if (sh && sh->cmds)
 			free_big_malloc_cmds(126, sh->cmds, -1);
@@ -49,6 +50,7 @@ static int	try_direct_path(t_shell *sh, t_command_data *cmd)
 			char *msg = ft_strjoin(cmd->cmd_splitted[0], ": No such file or directory\n");
 			write(2, msg, ft_strlen(msg));
 			free(msg);
+			free_tracked_heredoc_nodes(&(sh->heredoc_tracker));
 			free_cmds_all(sh->cmds, sh->analyzing_data.cmds_count, 0);
 			free_both_envp_paths(sh);
 			exit(127);
@@ -82,6 +84,7 @@ static void	not_found_exit(t_shell *sh, t_command_data *cmd)
 		free_token_array(sh->analyzing_data.args, token_count);
 	if (sh->tokens)
 		free_list(sh->tokens);
+	free_tracked_heredoc_nodes(&(sh->heredoc_tracker));
 	if (sh && sh->cmds)
 		free_big_malloc_cmds(0, sh->cmds, -1);
 	free_both_envp_paths(sh);

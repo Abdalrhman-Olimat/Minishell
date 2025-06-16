@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 05:45:46 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/15 15:59:10 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 00:34:51 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	callc_all(t_command_data *cmd, int which)
 	else if (which == CLC_CMD_FULL)
 		cmd->cmd_full = ft_calloc(MAXIMUM_CMD_SIZE, sizeof(char));
 	else if (which == CLC_DELM)
-		cmd->delim = ft_calloc(10, sizeof(char *));
+		cmd->delim = ft_calloc(11, sizeof(char *));
 }
 
 static int	allocate_fields(t_command_data *cmd)

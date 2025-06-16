@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 04:54:19 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/15 15:58:38 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 01:08:04 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	free_single_cmd_node(t_command_data *cmd)
 		&& cmd->delim != (char **)0x2 && cmd->delim != (char **)0x3)
 	{
 		i = 0;
-		while (cmd->delim && cmd->delim[i] != NULL)
+		while (cmd->delim[i] != NULL)
 		{
 			safe_free_str(cmd->delim[i]);
 			i++;
