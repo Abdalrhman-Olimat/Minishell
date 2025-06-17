@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 04:54:04 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/12 04:54:05 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 05:33:53 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	free_big_malloc_cmds(size_t err_num, t_command_data **cmds, int i)
 	{
 		while (cmds[++i])
 		{
+			/* Close heredoc file descriptor if it's open */
+			if (cmds[i]->fd_of_heredoc != -1)
+			{
+				close(cmds[i]->fd_of_heredoc);
+				cmds[i]->fd_of_heredoc = -1;
+			}
 			if (cmds[i]->cmd_splitted)
 				free_2d_arr(cmds[i]->cmd_splitted);
 			if (cmds[i]->in_file)

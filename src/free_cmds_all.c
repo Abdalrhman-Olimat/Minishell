@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 04:54:19 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/15 15:58:38 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 05:33:53 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ static void	free_single_cmd_node(t_command_data *cmd)
 
 	if (!cmd)
 		return ;
+	/* Close heredoc file descriptor if it's open */
+	if (cmd->fd_of_heredoc != -1)
+	{
+		close(cmd->fd_of_heredoc);
+		cmd->fd_of_heredoc = -1;
+	}
 	safe_free_str(cmd->cmd_full);
 	safe_free_str(cmd->in_file);
 	safe_free_str(cmd->out_file);
