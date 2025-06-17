@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 05:47:24 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/12 05:57:00 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:38:13 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ int	process_token_word(size_t *splt_arg_index, t_shell *shell,
 			if (cmds->cmd_splitted == NULL)
 				cmds->cmd_splitted = ft_calloc((1
 							+ count_tokens_till_pipe(current_token)),
-												sizeof(char *));
-			cmds->cmd_splitted[*splt_arg_index] = ft_strdup(current_token->string);
+						sizeof(char *));
+			cmds->cmd_splitted[*splt_arg_index]
+				= ft_strdup(current_token->string);
 			(*splt_arg_index)++;
 		}
 		else
 		{
-			cmds->cmd_splitted[*splt_arg_index] = ft_strdup(current_token->string);
+			cmds->cmd_splitted[*splt_arg_index]
+				= ft_strdup(current_token->string);
 			(*splt_arg_index)++;
 		}
 		process_cmd_quoted_error(shell, cmds);

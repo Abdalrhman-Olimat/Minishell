@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 21:39:14 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/05/16 21:47:02 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:49:31 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,14 @@ int	handle_quote_in_token(t_tokenizer_state *state)
 	{
 		state->in_quotes = 0;
 	}
+	return (1);
+}
+
+int	create_quoted_node(t_tokenizer_state *state, char *quoted_buf,
+		bool is_double_quote)
+{
+	append_node(state->head, quoted_buf, TYPE_WORD);
+	set_node_quoted(state->head, is_double_quote);
+	free(quoted_buf);
 	return (1);
 }

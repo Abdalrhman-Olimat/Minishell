@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 11:23:49 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/17 09:22:56 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 13:10:30 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # include <limits.h>
 # include <errno.h>
 # include <sys/wait.h>
-
 
 extern volatile sig_atomic_t	g_signal;
 
@@ -395,7 +394,8 @@ char			*determine_target_dir(char **argv, char *old_pwd,
 					int *print_flag);
 void			update_pwd_env(char *old_pwd, char *new_pwd, int print_flag);
 char			*handle_cd_dash(char *old_pwd, int *print_flag);
-int	ft_export(char **args, t_analyzing_data *analyze, bool *is_from_expansion);
+int				ft_export(char **args,
+					t_analyzing_data *analyze, bool *is_from_expansion);
 bool			is_redirection_operator(char *arg);
 char			*handle_cd_dash(char *old_pwd, int *print_flag);
 char			*get_env22(const char *name);
@@ -425,39 +425,41 @@ int				ft_unset(char **args, t_analyzing_data *analyze);
 void			free_and_fetch_pth(t_shell *sh, t_command_data *cmd);
 void			handle_failure_of_pth(t_shell *sh, t_command_data *cmd);
 void			handle_path_failure(t_shell *sh, t_command_data *cmd);
-
 void			add_env_var(t_analyzing_data *analyze, const char *var);
-
 void			update_env_var(char **envp, const char *var, int pos);
-
-int	find_env_var(char **envp, const char *name, int name_len, int i);
-
+int				find_env_var(char **envp, const char *name,
+					int name_len, int i);
 void			add_or_update(t_analyzing_data *analyze, const char *var);
-
 void			refresh_path_cache(t_shell *sh);
-
 void			sort_env(char **sorted, int count);
 int				get_name_length(const char *var);
-void	setup_signals_prompt(void);
-void	sigint_handler(int sig);
-void	setup_signals_exec(void);
-void	sigint_handler_exec(int sig);
-void flush_stdin_buffer(void);
-void	setup_signals_exec(void);
-void	setup_prompt_signal(void);
-void	setup_default_signal(void);
-void	reset_signals(void);
-void setup_prompt_signal(void);
-void setup_default_signal(void);
-void reset_signals(void);
-void	print_env(char **sorted);
-void	print_sorted_env(char **envp);
-int	is_valid_until_equal_or_end(const char *str, int start_index);
-int	is_valid_first_char(const char first_char);
-int	is_valid_identifier(const char *str);
-int	is_valid_char(char c);
-char	*get_env_value(const char *name, char **envp);
-int	safe_close_fd(int fd);
-
+void			setup_signals_prompt(void);
+void			sigint_handler(int sig);
+void			setup_signals_exec(void);
+void			sigint_handler_exec(int sig);
+void			flush_stdin_buffer(void);
+void			setup_signals_exec(void);
+void			setup_prompt_signal(void);
+void			setup_default_signal(void);
+void			reset_signals(void);
+void			setup_prompt_signal(void);
+void			setup_default_signal(void);
+void			reset_signals(void);
+void			print_env(char **sorted);
+void			print_sorted_env(char **envp);
+int				is_valid_until_equal_or_end(const char *str, int start_index);
+int				is_valid_first_char(const char first_char);
+int				is_valid_identifier(const char *str);
+int				is_valid_char(char c);
+char			*get_env_value(const char *name, char **envp);
+int				handle_heredoc_parent_process(t_shell *shell,
+					t_command_data *cmd, int pipe_fd[2], pid_t pid);
+void			handle_heredoc_child_process(int pipe_fd[2],
+					t_command_data *cmd, int delem_index);
+void			parent_signal_handler(int sig);
+int				handle_heredoc_interrupt(t_shell *shell,
+					t_command_data *command);
+int				handle_heredoc_interrupt2(t_shell *shell,
+					t_command_data *cmd, int pipe_fd);
 
 #endif

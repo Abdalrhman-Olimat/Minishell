@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 23:25:24 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/17 10:09:52 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:48:19 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,41 @@ void	print_word(char *word, int *first_ptr)
 	*first_ptr = 0;
 }
 
+static void	init_echo_vars(int *i, int *suppress_newline, int *first)
+{
+	*i = 1;
+	*suppress_newline = 0;
+	*first = 1;
+}
+
+static int	is_valid_n_flag(char *arg)
+{
+	int	j;
+
+	if (arg[0] != '-')
+		return (0);
+	j = 1;
+	while (arg[j] == 'n')
+		j++;
+	if (arg[j] != '\0')
+		return (0);
+	return (1);
+}
+
 int	ft_echo(char **argv)
 {
 	int	i;
 	int	suppress_newline;
 	int	first;
-	int	j;
 
-	i = 1;
-	suppress_newline = 0;
-	first = 1;
+	init_echo_vars(&i, &suppress_newline, &first);
 	if (argv[1] == NULL)
 	{
 		printf("\n");
 		return (0);
 	}
-	while (argv[i] != NULL && argv[i][0] == '-')
+	while (argv[i] != NULL && is_valid_n_flag(argv[i]))
 	{
-		j = 1;
-		while (argv[i][j] == 'n')
-			j++;
-		if (argv[i][j] != '\0')
-			break ;
 		suppress_newline = 1;
 		i++;
 	}

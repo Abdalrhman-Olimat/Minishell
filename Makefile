@@ -20,6 +20,7 @@ SRC = \
 	change_redirections.c \
 	cmds.c \
 	copy_old_data.c \
+	process_heredoc2.c\
 	count_cmds_tokens.c \
 	exec_builtin.c \
 	exec_child.c \

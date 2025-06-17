@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 05:12:17 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/17 08:46:31 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:39:53 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	handle_heredoc(t_shell *shell, t_input **token, t_command_data **cmd,
 		}
 		if (cmd[*cmd_i]->cmd_full == NULL || cmd[*cmd_i]->cmd_full[0] == '\0')
 			ft_strlcpy(cmd[*cmd_i]->cmd_full, "cat", MAXIMUM_CMD_SIZE);
-		cmd[*cmd_i]->delim[cmd[*cmd_i]->index_of_heredoc] = ft_strdup((*token)->next->string);
+		cmd[*cmd_i]->delim[cmd[*cmd_i]->index_of_heredoc]
+			= ft_strdup((*token)->next->string);
 	}
 	return (increase_heredoc_index(cmd, cmd_i));
 }

@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 08:44:45 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/17 08:44:46 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:39:23 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,11 @@ void	print_sorted_env(char **envp)
 	char	**sorted;
 
 	count = count_envp_length(envp);
-		// Count the number of environment variables
 	if (count == 0)
 		return ;
-	sorted = copy_envp(envp, count); // Copy environment variables
+	sorted = copy_envp(envp, count);
 	if (!sorted)
 		return ;
-	sort_env(sorted, count); // Sort the environment variables
-	print_env(sorted);       // Print the sorted environment variables
+	sort_env(sorted, count);
+	print_env(sorted);
 }

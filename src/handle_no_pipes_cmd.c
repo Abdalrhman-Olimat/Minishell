@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 05:13:14 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/12 05:21:44 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/15 20:31:49 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,3 @@ int	handle_no_pipes_command(t_command_data *command, int *stdin_backup,
 	}
 	return (0);
 }
-/*
-	// if (command->command_split&& command->command_split[0]
-	// TODO- Maybe need to do this function
-	// 	&& ft_strchr(command->command_split[0], ' ')
-			&& command->was_quoted != 1)
-	// 	handle_unquoted_spaces(command);
-	before the return
-*/

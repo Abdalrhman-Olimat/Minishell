@@ -6,13 +6,13 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 04:12:40 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/17 10:06:57 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:57:18 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini.h"
 
-static int	tell_to_stop(t_command_data *cmds)
+int	tell_to_stop(t_command_data *cmds)
 {
 	if (cmds->fd_of_heredoc != -1)
 	{
@@ -22,7 +22,7 @@ static int	tell_to_stop(t_command_data *cmds)
 	return (0);
 }
 
-static int	handle_heredoc_interrupt(t_shell *shell, t_command_data *command)
+int	handle_heredoc_interrupt(t_shell *shell, t_command_data *command)
 {
 	if (command)
 		command->skip_all_execution = true;
@@ -31,7 +31,7 @@ static int	handle_heredoc_interrupt(t_shell *shell, t_command_data *command)
 	return (1);
 }
 
-static int	iter_on_herdoc(t_shell *shell, int i, int j, size_t rlt_slm)
+int	iter_on_herdoc(t_shell *shell, int i, int j, size_t rlt_slm)
 {
 	if (FT > 0 && shell->cmds && shell->cmds[i])
 	{
