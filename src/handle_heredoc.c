@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 05:12:17 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/17 01:08:03 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/15 19:52:41 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,20 @@ int	handle_heredoc(t_shell *shell, t_input **token, t_command_data **cmd,
 		/* If there's no command before the heredoc, create a dummy command */
 		if (cmd[*cmd_i]->cmd_full == NULL || cmd[*cmd_i]->cmd_full[0] == '\0')
 		{
-			// cmd[*cmd_i]->cmd_full is already allocated by prepare_command_struct.
-			// No need to malloc it again. Just copy "cat" into the existing buffer.
+			cmd[*cmd_i]->cmd_full = malloc(MAXIMUM_CMD_SIZE);
+			if (!cmd[*cmd_i]->cmd_full)
+				return (0);
+			ft_memset(cmd[*cmd_i]->cmd_full, 0, MAXIMUM_CMD_SIZE);
 			ft_strlcpy(cmd[*cmd_i]->cmd_full, "cat", MAXIMUM_CMD_SIZE);
 			
-			// cmd_splitted part: prepare_command_struct initializes cmd_splitted to NULL.
-			// The responsibility of creating cmd_splitted will now solely be on init_splits
-			// based on the content of cmd_full.
-			// Removed allocation of dummy cmd_splitted here to prevent leaks.
+			cmd[*cmd_i]->cmd_splitted = malloc(sizeof(char *) * 2);
+			if (!cmd[*cmd_i]->cmd_splitted)
+			{
+				free(cmd[*cmd_i]->cmd_full);
+				return (0);
+			}
+			cmd[*cmd_i]->cmd_splitted[0] = ft_strdup("cat");
+			cmd[*cmd_i]->cmd_splitted[1] = NULL;
 		}
 		
 		/* Store the delimiter */
