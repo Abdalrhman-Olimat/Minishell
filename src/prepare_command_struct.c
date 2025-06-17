@@ -32,7 +32,7 @@ static void	callc_all(t_command_data *cmd, int which)
 	else if (which == CLC_CMD_FULL)
 		cmd->cmd_full = ft_calloc(MAXIMUM_CMD_SIZE, sizeof(char));
 	else if (which == CLC_DELM)
-		cmd->delim = ft_calloc(10, sizeof(char *));
+		cmd->delim = ft_calloc(11, sizeof(char *));
 }
 
 static int	allocate_fields(t_command_data *cmd)
