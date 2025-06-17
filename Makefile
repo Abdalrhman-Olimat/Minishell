@@ -9,7 +9,6 @@ SRC = \
 	alloc_envp.c \
 	analyze_cmds.c \
 	analyze_pipes.c \
-	apply_signals.c \
 	big_malloc.c \
 	builtin_cd.c \
 	builtin_echo.c \
@@ -44,19 +43,15 @@ SRC = \
 	handle_expansion.c \
 	handle_heredoc.c \
 	handle_heredoc_input.c \
-	handle_interrupt_of_heredoc.c \
 	handle_no_pipes_cmd.c \
 	handle_redir_in.c \
 	handle_redir_out.c \
-	handle_signals.c \
 	heredoc_signal_handler.c \
 	set_node_quoted.c \
-	init_execution_data.c \
-	init_splits.c \
-	input_handler.c \
-	is_built_in.c \
-	just_execute.c \
 	main.c \
+	init_execution_data.c\
+	init_splits.c\
+	is_built_in.c\
 	normalize_linked_list.c \
 	parse_tokens_into_cmds.c \
 	play_after_tokens.c \

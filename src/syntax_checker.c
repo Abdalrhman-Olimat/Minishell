@@ -69,10 +69,10 @@ int	syntax_checker(t_input *tokens)
  * Returns 1 for valid syntax, 0 for errors
  */
 {
-	t_input	*current;
-	t_input	*last_token;
-	int		has_word;
-	int		status;
+	t_input *current;
+	t_input *last_token;
+	int has_word;
+	int status;
 
 	if (!tokens)
 		return (1);

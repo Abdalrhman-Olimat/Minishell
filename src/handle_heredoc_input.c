@@ -12,6 +12,24 @@
 
 #include "../includes/mini.h"
 
+static char	*validate_heredoc_delimiter(t_command_data *cmd, int delem_index)
+{
+	char	*delimiter;
+
+	if (cmd == NULL || cmd->delim == NULL || cmd->delim[delem_index] == NULL)
+	{
+		write(2, "Error: Invalid heredoc delimiter\n", 32);
+		exit(1);
+	}
+	delimiter = cmd->delim[delem_index];
+	if (delimiter[0] == '\0')
+	{
+		write(2, "Error: Empty heredoc delimiter\n", 30);
+		exit(1);
+	}
+	return (delimiter);
+}
+
 static void	put_and_free(char *line, int fd_outstream)
 {
 	if (line)
@@ -22,27 +40,13 @@ static void	put_and_free(char *line, int fd_outstream)
 	}
 }
 
-void	handle_heredoc_input(int fd_outstream, t_command_data *cmd, int delem_index)
+void	handle_heredoc_input(int fd_outstream, t_command_data *cmd,
+		int delem_index)
 {
 	char	*line;
 	char	*delimiter;
 
-	/* Safety check for the delimiter */
-	if (cmd == NULL || cmd->delim == NULL || cmd->delim[delem_index] == NULL)
-	{
-		write(2, "Error: Invalid heredoc delimiter\n", 32);
-		exit(1);//
-	}
-
-	delimiter = cmd->delim[delem_index];
-	
-	/* Additional safety check */
-	if (delimiter[0] == '\0') 
-	{
-		write(2, "Error: Empty heredoc delimiter\n", 30);
-		exit(1);//
-	}
-
+	delimiter = validate_heredoc_delimiter(cmd, delem_index);
 	while (1)
 	{
 		line = readline("> ");
@@ -56,8 +60,7 @@ void	handle_heredoc_input(int fd_outstream, t_command_data *cmd, int delem_index
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
-			close(fd_outstream);//
-			
+			close(fd_outstream);
 			exit(0);
 		}
 		put_and_free(line, fd_outstream);

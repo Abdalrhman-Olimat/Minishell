@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 05:54:29 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/15 19:52:41 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 10:13:50 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ static void	cleanup_tokens_and_cmds(t_shell *shell)
 static void	handle_args_allocation_failure(t_shell *shell)
 {
 	ft_putstr_fd("Unfortunately .. an error occoured -> failed\
-        in memory allocation for args\n",
-		2);
+        in memory allocation for args\n", 2);
 	if (shell->tokens_header)
 	{
 		free_list(shell->tokens_header);
@@ -100,15 +99,12 @@ void	play_after_tokens(t_shell *shell)
 	}
 	shell->analyzing_data.args = args;
 	result = cmds(shell, 1, 0);
-	
-	/* Don't proceed with command execution if we got SHELL_EXIT during heredoc */
 	if (result == SHELL_EXIT || shell->heredoc_interrupted)
 	{
 		cleanup_analyzing_args(shell);
 		cleanup_tokens_and_cmds(shell);
-		return;
+		return ;
 	}
-	
 	cleanup_analyzing_args(shell);
 	cleanup_tokens_and_cmds(shell);
 }

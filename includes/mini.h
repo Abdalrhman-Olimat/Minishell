@@ -6,7 +6,7 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 11:23:49 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/15 15:42:52 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 09:22:56 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,8 +250,6 @@ void			exit_err_str(char *str);
 int				process_heredoc(t_shell *shell, t_command_data *cmd,
 					int delem_index);
 void			heredoc_signal_handler(int sig);
-int				handle_interrupt_of_heredoc(size_t rlk,
-					t_command_data *cmd, bool is_rlm);
 void			handle_heredoc_input(int fd_outstream, t_command_data *cmd,
 					int delem_index);
 void			apply_sig_action(int sig);
@@ -278,7 +276,6 @@ int				exec_builtin(t_shell *shell, t_command_data *command,
 					int *stdin_backup, int *stdout_backup);
 int				exec_child_setting(t_command_data *cmd,
 					t_pipe_data *pipe, int i, int j);
-int				just_execute(t_shell *shell, t_command_data *command, int i);
 int				skip_piped_cmd(t_command_data *command, t_pipe_data *pipe_data);
 char			**copy_old_data(int old_len, int new_len, char **old_str);
 void			free_2d_arr(char **string);
@@ -460,6 +457,7 @@ int	is_valid_first_char(const char first_char);
 int	is_valid_identifier(const char *str);
 int	is_valid_char(char c);
 char	*get_env_value(const char *name, char **envp);
+int	safe_close_fd(int fd);
 
 
 #endif

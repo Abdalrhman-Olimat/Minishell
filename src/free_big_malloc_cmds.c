@@ -6,11 +6,35 @@
 /*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 04:54:04 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/06/17 05:33:53 by aeleimat         ###   ########.fr       */
+/*   Updated: 2025/06/17 09:22:18 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini.h"
+
+static void	free_single_command(t_command_data *cmd, size_t err_num)
+{
+	if (cmd->fd_of_heredoc != -1)
+	{
+		close(cmd->fd_of_heredoc);
+		cmd->fd_of_heredoc = -1;
+	}
+	if (cmd->cmd_splitted)
+		free_2d_arr(cmd->cmd_splitted);
+	if (cmd->in_file)
+		free(cmd->in_file);
+	if (cmd->out_file)
+		free(cmd->out_file);
+	if (cmd->cmd_full)
+		free(cmd->cmd_full);
+	if (cmd->path_var)
+		free(cmd->path_var);
+	if (cmd->cmd_path && !err_num)
+		free(cmd->cmd_path);
+	if (cmd->delim)
+		free_2d_arr(cmd->delim);
+	free(cmd);
+}
 
 void	free_big_malloc_cmds(size_t err_num, t_command_data **cmds, int i)
 {
@@ -20,25 +44,7 @@ void	free_big_malloc_cmds(size_t err_num, t_command_data **cmds, int i)
 	{
 		while (cmds[++i])
 		{
-			/* Close heredoc file descriptor if it's open */
-			if (cmds[i]->fd_of_heredoc != -1)
-			{
-				close(cmds[i]->fd_of_heredoc);
-				cmds[i]->fd_of_heredoc = -1;
-			}
-			if (cmds[i]->cmd_splitted)
-				free_2d_arr(cmds[i]->cmd_splitted);
-			if (cmds[i]->in_file)
-				free(cmds[i]->in_file);
-			if (cmds[i]->out_file)
-				free(cmds[i]->out_file);
-			if (cmds[i]->cmd_full)
-				free(cmds[i]->cmd_full);
-			if (cmds[i]->cmd_path && !err_num)
-				free(cmds[i]->cmd_path);
-			if (cmds[i]->delim)
-				free_2d_arr(cmds[i]->delim);
-			free(cmds[i]);
+			free_single_command(cmds[i], err_num);
 		}
 		free(cmds);
 	}

@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_valid_identifier.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/17 10:12:57 by aeleimat          #+#    #+#             */
+/*   Updated: 2025/06/17 10:13:20 by aeleimat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/mini.h"
 
 /*
- * Checks if the character is a valid identifier character (alphanumeric or '_')
+ * Checks if the character is a valid 
+ identifier character (alphanumeric or '_')
  */
 int	is_valid_char(char c)
 {
@@ -9,16 +22,18 @@ int	is_valid_char(char c)
 }
 
 /*
- * Checks if the first character of the identifier is valid (alphabet or underscore)
+* Checks if the first character of the 
+identifier is valid (alphabet or underscore)
  */
 int	is_valid_first_char(const char first_char)
 {
 	return (ft_isalpha(first_char) || first_char == '_');
 }
 
-
 /*
- * Loops over the string until '=' or '\0' and checks if the characters are valid
+
+	* Loops over the string until '=' or '\0'
+	and checks if the characters are valid
  */
 int	is_valid_until_equal_or_end(const char *str, int start_index)
 {
@@ -27,7 +42,7 @@ int	is_valid_until_equal_or_end(const char *str, int start_index)
 	i = start_index;
 	while (str[i] && str[i] != '=')
 	{
-		if (!is_valid_char(str[i]))  // Use the new helper function for validation
+		if (!is_valid_char(str[i]))
 			return (0);
 		i++;
 	}
@@ -43,10 +58,8 @@ int	is_valid_identifier(const char *str)
 
 	if (!str || !*str)
 		return (0);
-
-	if (!is_valid_first_char(str[0]))    // Check the first character
+	if (!is_valid_first_char(str[0]))
 		return (0);
-	
 	i = 1;
-	return (is_valid_until_equal_or_end(str, i));  // Use the helper to check the rest of the string
+	return (is_valid_until_equal_or_end(str, i));
 }
